@@ -1,0 +1,50 @@
+﻿@using MVC_AjaxHelperMetotlari.Models
+@model Kisi
+@{
+    ViewBag.Title = "Index2";
+}
+
+@using (Ajax.BeginForm("Index2", new AjaxOptions() { HttpMethod = "POST", LoadingElementId = "loading", LoadingElementDuration = 300, UpdateTargetId = "liste", InsertionMode = InsertionMode.InsertAfter }))
+{
+    @*<div class="col-md-12">
+            @Html.TextBoxFor(x => x.isim, new { @class = "form-control" })
+        </div>
+        <br />
+        <br />*@
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.isim, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.isim, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.soyisim, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.soyisim, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Kaydet</button>
+        </div>
+    </div>
+}
+<hr />
+<br />
+<ul class="list-group" id="liste">
+    <li id="loading" class="list-group-item list-group-item-warning" style="display:none">yükleniyor</li>
+    @if (ViewBag.kisiler != null)
+    {
+        foreach (var item in (List<Kisi>)ViewBag.kisiler)
+        {
+            <li class="list-group-item" id="id_@item.Id">@item.isim</li>
+        }
+    }
+</ul>
